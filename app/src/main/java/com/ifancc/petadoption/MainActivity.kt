@@ -36,20 +36,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
-data class Pet(val name: String)
-
-//@Composable
-//fun Feed(
-//    feedItems: List<Pet>,
-//    onSelected: (Pet) -> Unit
-//) {
-//    Scrollable(Modifier.fillMaxSize()) {
-//        feedItems.forEach {
-//            ArtistCard(it, onSelected)
-//        }
-//    }
-//}
 @Composable
 fun LayoutsCodelab(onClick: (() -> Unit)? = null) {
     Scaffold(topBar = {
@@ -105,10 +91,7 @@ fun PetCard(modifier: Modifier = Modifier,
                 }
             }
         }
-
-
     }
-
 }
 @Preview
 @Composable

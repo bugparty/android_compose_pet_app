@@ -73,11 +73,8 @@ fun PetDetail(onBack:(()->Unit)?= null) {
                             Text("three years old")
                         }
                     }
-
                 }
-
             }
         }
-
     }
 }
