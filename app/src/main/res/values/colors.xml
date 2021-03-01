@@ -12,4 +12,5 @@
     <color name="OwnerTextColor">#ffcdccd1</color>
     <color name="GreyTextColor">#ffb1b1b1</color>
     <color name="PinkButton">#ffef6d9d</color>
+    <color name="background_grey">#fff6f6f6</color>
 </resources>

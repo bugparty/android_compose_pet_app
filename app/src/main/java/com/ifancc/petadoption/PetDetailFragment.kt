@@ -151,12 +151,13 @@ fun PetDetail(){
                         shape= RoundedCornerShape(15.dp)){
                             Icon(imageVector = Icons.Filled.FavoriteBorder,"like")
                         }
-                        Button(onClick = {},colors= ButtonDefaults.buttonColors(backgroundColor = colorResource(
+                        Button(onClick = {},
+                            colors= ButtonDefaults.buttonColors(backgroundColor = colorResource(
                             id = R.color.PinkButton
                         )),
                            modifier = Modifier
-                               .fillMaxWidth()
-                               .padding(start = 50.dp, top = 5.dp)){
+                               .height(45.dp).fillMaxWidth()
+                               .padding(start = 50.dp)){
                             Text("adoption")
                         }
                     }

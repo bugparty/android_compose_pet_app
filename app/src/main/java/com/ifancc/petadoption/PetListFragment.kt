@@ -3,20 +3,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Center
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.fragment.app.Fragment
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,7 +41,7 @@ class PetListFragment:Fragment() {
             )
             setContent {
                 PetAdoptionTheme {
-                    LayoutsCodelab(onClick = {
+                    PetList(onClick = {
                         navigate(Screen.PetDetail, Screen.PetList)
                     })
                 }
@@ -46,7 +50,7 @@ class PetListFragment:Fragment() {
     }
 }
 @Composable
-fun LayoutsCodelab(onClick: (() -> Unit)? = null) {
+fun PetList(onClick: (() -> Unit)? = null) {
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(text = "Pet Adaption App")
@@ -61,51 +65,76 @@ fun PetCardList(modifier: Modifier = Modifier, onClick: (() -> Unit)? = null){
     // We save the scrolling position with this state that can also
     // be used to programmatically scroll the list
     val scrollState = rememberScrollState()
-    Column(Modifier.verticalScroll(scrollState)) {
+    Column(
+        Modifier
+            .verticalScroll(scrollState)
+            .background(colorResource(id = R.color.background_grey))
+            .padding(horizontal = 40.dp),
+        horizontalAlignment = CenterHorizontally
+            ) {
         repeat(100) {
             PetCard(onClick = onClick)
         }
     }
 
 }
+@Preview
 @Composable
 fun PetCard(modifier: Modifier = Modifier,
             onClick: (() -> Unit)? = null ) {
 
     val catImagePainter = painterResource(id = R.drawable.cat1)
     Row(modifier = Modifier
-        .clickable { onClick?.invoke()}
+        .clickable { onClick?.invoke() }
         .padding(8.dp)
         .fillMaxWidth()) {
         Surface(
-            modifier = Modifier.height(120.dp),
-            shape = RoundedCornerShape(5.dp),
+            modifier = Modifier
+                .height(160.dp)
+                .width(140.dp),
+            shape = RoundedCornerShape(15.dp),
             color = MaterialTheme.colors.onSurface.copy(0.2f)
         ) {
             Image(catImagePainter,
-                contentDescription = "Cat Example"
+                contentDescription = "Cat Example",
+                contentScale= ContentScale.Crop
             )
         }
-        Surface(shape = RoundedCornerShape(5.dp),
-            color = Color.Gray) {
-            Column(
-                modifier = Modifier
-                    .padding(8.dp)
-                    .align(Alignment.CenterVertically)
+        Box(modifier = Modifier.height(160.dp),
+            contentAlignment = Center
+        ){
+            Surface(
+                shape = RoundedCornerShape(topEnd = 5.dp, bottomEnd = 5.dp),
+                color = Color.White) {
+                Column(
+                    modifier = Modifier
+                        .padding(20.dp),
 
-            ) {
-                Text("Alfred Sisley", fontWeight = FontWeight.Bold)
-                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                    Text("3 minutes ago", style = MaterialTheme.typography.body2)
+
+                ) {
+                    Text("Pastel", fontWeight = FontWeight.Bold,
+                    color = colorResource(id = R.color.PetName))
+                    Text("Cat", style = MaterialTheme.typography.body2,
+                    color = colorResource(id = R.color.GreyTextColor))
+                    Text("3 years old",
+                        color = colorResource(id = R.color.GreyTextColor))
+                    Row{
+                        Icon(imageVector = Icons.Filled.LocationOn,"location",
+                            tint = colorResource(id = R.color.GreyTextColor))
+                        Text("93 shoreline",
+                            color= colorResource(id = R.color.GreyTextColor),
+                            modifier = Modifier.padding(start=8.dp))
+                    }
                 }
             }
         }
+
     }
 }
-@Preview
+
 @Composable
 fun PhotographerCardPreview() {
     PetAdoptionTheme {
-        LayoutsCodelab()
+        PetList()
     }
 }
