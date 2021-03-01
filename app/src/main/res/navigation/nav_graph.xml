@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
-
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/pet_list_fragment">
+    <fragment
+        android:id="@+id/pet_list_fragment"
+        android:name="com.ifancc.petadoption.PetListFragment"
+        android:label="PetListFragment" >
+        <action
+            android:id="@+id/action_petListFragment_to_petDetailFragment"
+            app:destination="@id/pet_detail_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pet_detail_fragment"
+        android:name="com.ifancc.petadoption.PetDetailFragment"
+        android:label="PetDetailFragment" >
+        <action
+            android:id="@+id/action_petDetailFragment_to_petListFragment"
+            app:destination="@id/pet_list_fragment" />
+    </fragment>
 </navigation>

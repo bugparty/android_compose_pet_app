@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="pet_list_fragment" type="id"></item>
+    <item name="pet_detail_fragment" type="id"></item>
+</resources>

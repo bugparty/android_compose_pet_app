@@ -20,83 +20,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.navigation.NavigationView
 import com.ifancc.petadoption.ui.theme.PetAdoptionTheme
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            PetAdoptionTheme {
-                LayoutsCodelab(onClick = {
-                    val intent = Intent(applicationContext, PetDetailActivity::class.java)
-                    startActivity(intent)
-                })
-            }
-
-        }
-    }
-}
-@Composable
-fun LayoutsCodelab(onClick: (() -> Unit)? = null) {
-    Scaffold(topBar = {
-        TopAppBar(title = {
-            Text(text = "Pet Adaption App")
-        })
-
-    }) { innerPadding ->
-        PetCardList(Modifier.padding(innerPadding), onClick = onClick)
-    }
-}
-@Composable
-fun PetCardList(modifier: Modifier= Modifier, onClick: (() -> Unit)? = null){
-    // We save the scrolling position with this state that can also
-    // be used to programmatically scroll the list
-    val scrollState = rememberScrollState()
-    Column(Modifier.verticalScroll(scrollState)) {
-        repeat(100) {
-            PetCard(onClick = onClick)
-        }
-    }
-
-}
-@Composable
-fun PetCard(modifier: Modifier = Modifier,
-            onClick: (() -> Unit)? = null ) {
-
-    val catImagePainter = painterResource(id = R.drawable.cat1)
-    Row(modifier = Modifier
-        .clickable { onClick?.invoke()}
-        .padding(8.dp)
-        .fillMaxWidth()) {
-        Surface(
-            modifier = Modifier.height(120.dp),
-            shape = RoundedCornerShape(5.dp),
-            color = MaterialTheme.colors.onSurface.copy(0.2f)
-        ) {
-            Image(catImagePainter,
-                contentDescription = "Cat Example"
-            )
-        }
-        Surface(shape = RoundedCornerShape(5.dp),
-            color = Color.Gray) {
-            Column(
-                modifier = Modifier
-                    .padding(8.dp)
-                    .align(Alignment.CenterVertically)
-
-            ) {
-                Text("Alfred Sisley", fontWeight = FontWeight.Bold)
-                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                    Text("3 minutes ago", style = MaterialTheme.typography.body2)
-                }
-            }
-        }
-    }
-}
-@Preview
-@Composable
-fun PhotographerCardPreview() {
-    PetAdoptionTheme {
-        LayoutsCodelab()
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_main)
+            val navView: NavigationView = findViewById(R.id.nav_view)
+            val navController = findNavController(R.id.nav_host_fragment)
+            navView.setupWithNavController(navController)
     }
 }

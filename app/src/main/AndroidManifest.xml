@@ -10,11 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetAdoption">
         <activity
-            android:name=".PetDetailActivity"
-            android:exported="true"
-            android:label="@string/title_activity_pet_detail"
-            android:theme="@style/Theme.PetAdoption.NoActionBar"></activity>
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
